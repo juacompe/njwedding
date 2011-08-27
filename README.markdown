@@ -1,0 +1,10 @@
+# Project Summary #
+The application that will be used on the collaborator's wedding.
+
+## Setup Deployment Environment #
+	pip install -r setup.pip
+
+## Setup Development Environment #
+	pip install -r setup.pip
+	pip install -r setup_dev.pip
+
