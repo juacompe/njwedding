@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+    <link type="text/css" rel="stylesheet" href="{{STATIC_URL}}css/testsuite.css" media="screen" />
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jqUnit.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jqMock.js"></script>
+{% endblock %}
+
+{% block body %}
+
+{% block test %}{% endblock %}
+
+<h2 id="banner"></h2>
+<h2 id="userAgent"></h2>
+		
+<div id="main" style="display: none;">
+  <form id="test-form">
+    <input/>
+  </form>
+  <div id="ajax">
+  </div>
+</div>
+<ol id="tests"></ol>
+
+{% endblock %}
+
