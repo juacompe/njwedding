@@ -4,7 +4,7 @@ var feed = [];
 twitter_search();
 
 function twitter_search() {
-    var url = "/site_media/media/feeds/twitter.json" 
+    var url = "/media/search.json" 
     $.Updater(url, {}, twitter_search_call_back);
 }
 
