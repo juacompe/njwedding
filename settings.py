@@ -149,3 +149,11 @@ LOGGING = {
         },
     }
 }
+
+# settings_local
+try:
+    from settings_local import *
+except ImportError, e:
+    if str(e) != 'No module named settings_local':
+        raise e
+
