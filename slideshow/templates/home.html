@@ -10,40 +10,31 @@
 {% endblock %}
 
 {% block body %}
+
 <div id="content">
-<h3>Dark Glass Demo</h3>
+<h3>Photos from #NJWedding</h3>
+
 <!-- Start VisualSlideShow.com BODY section -->
 <div id="show" class="slideshow" style="margin-left: -10px;">
 
   <div class="slideshow-images">
 
-  <a href="{{IMAGE_URL}}132883093_49660b8f2a_z.jpg">
-    <img id="slide-0" src="{{IMAGE_URL}}132883093_49660b8f2a_z.jpg" 
+  {% for image in images %}
+    <a href="{{IMAGE_URL}}{{image}}">
+    <img id="slide-{{ forloop.counter }}" src="{{IMAGE_URL}}{{image}}" 
          alt="Flowers at Amsterdam" /></a>
+  {% endfor %}
+  </div>
 
-  <a href="{{IMAGE_URL}}399107666.jpg">
-    <img id="slide-1" src="{{IMAGE_URL}}399107666.jpg" 
-         alt="A Bumble Bee feasting on a field of flowers." /></a>
-
-  <a href="{{IMAGE_URL}}2957442267_6afce8dd8f_z.jpg">
-    <img id="slide-2" src="{{IMAGE_URL}}2957442267_6afce8dd8f_z.jpg" 
-         alt="A Bumble Bee feasting on a field of flowers." /></a>
-
-  <a href="{{IMAGE_URL}}5975249429_4c076b25c1_z.jpg">
-    <img id="slide-3" src="{{IMAGE_URL}}5975249429_4c076b25c1_z.jpg" 
-         alt="A Bumble Bee feasting on a field of flowers." /></a>
-
-  <a href="{{IMAGE_URL}}6041022237_287ede031f_z.jpg">
-    <img id="slide-4" src="{{IMAGE_URL}}6041022237_287ede031f_z.jpg" 
-         alt="A Bumble Bee feasting on a field of flowers." /></a>
-</div>
-
-<div class="slideshow-thumbnails">
+  <div class="slideshow-thumbnails">
   <ul>
-    <li><a href="#slide-0"><img src="{{THUMBNAIL_URL}}132883093_49660b8f2a_z.jpg" alt="Flowers at Amsterdam" /></a></li>
-    <li><a href="#slide-1"><img src="images/demo/flowers/data/thumbnails/2.jpg" alt="A Bumble Bee feasting on a field of flowers." /></a></li>
+  {% for image in images %}
+    <li><a href="#slide-{{ forloop.counter }}">
+        <img src="{{THUMBNAIL_URL}}{{image}}.jpg" alt="Flowers at Amsterdam" /></a>
+    </li>
+  {% endfor %}
   </ul>
-</div>
+  </div>
 
 <a id="vlb" href="http://visualslideshow.com">HTML Photo Slideshow by VisualSlideshow.com v1.0</a>
 </div>
