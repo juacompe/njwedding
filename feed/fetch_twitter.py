@@ -32,7 +32,10 @@ def parse_tweets(result_dict):
     results = result_dict['results']
     for tweet in results:
         text = tweet['text']
-        find_url_in_tweet(text)
+        urls = find_url_in_tweet(text)
+        for url in urls:
+            client.request(url)
+            #TODO save image in the page if it belongs to twitpic
     return result_dict
     
 def find_url_in_tweet(text):
