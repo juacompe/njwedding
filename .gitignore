@@ -1,3 +1,4 @@
 *.pyc
+*.swp
 pip-log.txt
 media/*.*
