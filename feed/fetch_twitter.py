@@ -25,7 +25,14 @@ def fetch_tweets():
 def write_to_file(content):
     """
     Write `content` into /media/search.json
-    """ 
+    """
+    #read existing content
+    exiting_content = default_storage.open('search.json').read()
+    #save existing content to backup
+    path = default_storage.save('search.json', ContentFile(exiting_content))
+    #delete current search.json
+    default_storage.delete('search.json')
+    #save new content to search.json, so search.json has the latest content from twitters
     path = default_storage.save('search.json', ContentFile(content))
 
 def parse_tweets(result_dict):
