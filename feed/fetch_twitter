@@ -1,3 +1,0 @@
-#!/bin/bash
-wget "http://search.twitter.com/search.json?q=FROM:juacompe+OR+%23thestar7" -O media/search.json
-

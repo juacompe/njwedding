@@ -13,7 +13,7 @@ def fetch_twitter():
     if response.status == 200:
         write_to_file(content)
         image_urls = parse_tweets(loads(content))
-        save_all(image_urls)
+        download_all(image_urls)
     
 def download_all(image_urls):
     for image_url in image_urls:
