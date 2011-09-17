@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
+from feed.regex import get_image_url_from_raw_html
 from httplib2 import Http 
 from json import loads
 
@@ -33,10 +34,23 @@ def parse_tweets(result_dict):
     for tweet in results:
         text = tweet['text']
         urls = find_url_in_tweet(text)
-        for url in urls:
-            client.request(url)
-            #TODO save image in the page if it belongs to twitpic
-    return result_dict
+        image_urls = [ find_image_url_in_page(url) for url in urls ]
+    return image_urls
+
+def find_image_url_in_page(url):
+    """
+    Open the page, find the photo in the page, and return url of the photo 
+    image.
+    """
+    response, content = client.request(url)
+    image_url = None
+    if is_twitpic_response(response):
+        image_url = get_image_url_from_raw_html(content)
+    return image_url
+    
+def is_twitpic_response(response):
+    location = response.get('content-location', '')
+    return location.find('http://twitpic.com') > -1
     
 def find_url_in_tweet(text):
     words = text.split(' ')
