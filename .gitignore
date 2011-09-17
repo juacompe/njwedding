@@ -1,3 +1,7 @@
 *.pyc
+*.swp
 pip-log.txt
 media/*.*
+media/collected_twitter_images/*
+.idea
+*~
