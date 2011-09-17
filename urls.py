@@ -7,7 +7,7 @@ from django.conf.urls.defaults import patterns, include, url
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'njwedding.views.home', name='home'),
+    url(r'^$', 'slideshow.views.home', name='home'),
     # url(r'^njwedding/', include('njwedding.foo.urls')),
     url(r'^testjs/', include('testjs.urls')),
 
