@@ -12,7 +12,8 @@ def fetch_twitter():
     response, content = fetch_tweets()
     if response.status == 200:
         write_to_file(content)
-        image_urls = parse_tweets(loads(content))
+        tweets = parse_tweets(loads(content))
+        image_urls = extract_urls_from_tweets(tweets)
         download_all(image_urls)
     
 def download_all(image_urls):
@@ -23,6 +24,7 @@ def download(image_url):
     response, content = client.request(image_url)
     
     if response.status == 200 and response.get('content-type', None) == 'image/jpeg':
+        image_url = image_url.split('?')[0] # chop the query string out
         image_name = default_storage.get_valid_name(image_url) 
         save_image(image_name, content)
     else:
@@ -53,10 +55,16 @@ def write_to_file(content):
 
 def parse_tweets(result_dict):
     results = result_dict['results']
-    for tweet in results:
-        text = tweet['text']
-        urls = find_url_in_tweet(text)
-        image_urls = [ find_image_url_in_page(url) for url in urls ]
+    return [ tweet['text'] for tweet in results ]
+
+def extract_urls_from_tweets(tweets):
+    image_urls = []
+    for tweet in iter(tweets):
+        urls = find_url_in_tweet(tweet)
+        for url in iter(urls):
+            image_url = find_image_url_in_page(url)
+            if image_url is not None:
+                image_urls.append(image_url)
     return image_urls
 
 def find_image_url_in_page(url):
