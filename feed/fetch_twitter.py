@@ -4,6 +4,7 @@ from django.core.files.storage import default_storage
 from feed.regex import get_image_url_from_raw_html
 from httplib2 import Http 
 from json import loads
+from slideshow.image_utils import save_image
 
 client = Http()
 
@@ -11,8 +12,22 @@ def fetch_twitter():
     response, content = fetch_tweets()
     if response.status == 200:
         write_to_file(content)
-        parse_tweets(loads(content))
+        image_urls = parse_tweets(loads(content))
+        save_all(image_urls)
     
+def download_all(image_urls):
+    for image_url in image_urls:
+        download(image_url)
+
+def download(image_url):
+    response, content = client.request(image_url)
+    
+    if response.status == 200 and response.get('content-type', None) == 'image/jpeg':
+        image_name = default_storage.get_valid_name(image_url) 
+        save_image(image_name, content)
+    else:
+        print '%s %s' % (response.status, response.get('content-type', None))
+
 def fetch_tweets():
     """
     Fetch tweets according to TWITTER_QUERY in django's settings and return
@@ -56,3 +71,4 @@ def find_url_in_tweet(text):
     words = text.split(' ')
     urls = [ word for word in words if word.count('http://') ]
     return urls 
+
