@@ -1,5 +1,6 @@
 import re
 
+#http://www.pythonregex.com/
 #Twitpic regex example:
 #regex_text='id="photo-display" src="(?P<src>.+?)"'
 
