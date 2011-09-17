@@ -41,7 +41,14 @@ def fetch_tweets():
 def write_to_file(content):
     """
     Write `content` into /media/search.json
-    """ 
+    """
+    #read existing content
+    exiting_content = default_storage.open('search.json').read()
+    #save existing content to backup
+    path = default_storage.save('search.json', ContentFile(exiting_content))
+    #delete current search.json
+    default_storage.delete('search.json')
+    #save new content to search.json, so search.json has the latest content from twitters
     path = default_storage.save('search.json', ContentFile(content))
 
 def parse_tweets(result_dict):
@@ -60,7 +67,8 @@ def find_image_url_in_page(url):
     response, content = client.request(url)
     image_url = None
     if is_twitpic_response(response):
-        image_url = get_image_url_from_raw_html(content)
+        regex_text='id="photo-display" src="(?P<src>.+?)"'
+        image_url = get_image_url_from_raw_html(content, regex_text)
     return image_url
     
 def is_twitpic_response(response):

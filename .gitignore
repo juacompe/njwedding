@@ -2,6 +2,6 @@
 *.swp
 pip-log.txt
 media/*.*
-media/collected_twitter_images/*.*
-media/collected_twitter_images/thumbnails/*.*
+media/collected_twitter_images/*
 .idea
+*~
