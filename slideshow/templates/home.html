@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+    <script type="text/javascript" src="{{STATIC_URL}}js/mootools.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/slideshow.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/visualslideshow.js"></script>
+    <link type="text/css" rel="stylesheet" href="{{STATIC_URL}}css/all.css" media="screen" />
+    <link type="text/css" rel="stylesheet" href="{{STATIC_URL}}css/slideshow.css" media="screen" />
+    <link type="text/css" rel="stylesheet" href="{{STATIC_URL}}css/vibrant.css" media="screen" />
+{% endblock %}
+
+{% block body %}
+
+<div id="content">
+<h3>Photos from #NJWedding</h3>
+
+<!-- Start VisualSlideShow.com BODY section -->
+<div id="show" class="slideshow" style="margin-left: -10px;">
+
+  <div class="slideshow-images">
+
+  {% for image in images %}
+    <a href="{{IMAGE_URL}}{{image}}">
+    <img id="slide-{{ forloop.counter }}" src="{{IMAGE_URL}}{{image}}" 
+         alt="Flowers at Amsterdam" /></a>
+  {% endfor %}
+  </div>
+
+  <div class="slideshow-thumbnails">
+  <ul>
+  {% for image in images %}
+    <li><a href="#slide-{{ forloop.counter }}">
+        <img src="{{THUMBNAIL_URL}}{{image}}" alt="Flowers at Amsterdam" /></a>
+    </li>
+  {% endfor %}
+  </ul>
+  </div>
+
+<a id="vlb" href="http://visualslideshow.com">HTML Photo Slideshow by VisualSlideshow.com v1.0</a>
+</div>
+<!-- End VisualSlideShow.com BODY section -->						
+
+</div>
+{% endblock %}
