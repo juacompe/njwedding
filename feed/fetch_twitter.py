@@ -77,6 +77,15 @@ def find_image_url_in_page(url):
     elif is_lockerz_response(response):
         regex_text='id="photo" src="(?P<src>.+?)"'
         image_url = get_image_url_from_raw_html(content, regex_text)
+#    elif is_pic_twitter_response(response):
+#        regex_text='src="(?P<src>.+?)" alt="pic.twitter.com.'
+#        image_url = get_image_url_from_raw_html(content, regex_text)
+    elif is_yfrog_response(response):
+        regex_text='id="main_image" src="(?P<src>.+?)"'
+        image_url = get_image_url_from_raw_html(content, regex_text)
+    elif is_molome_response(response):
+        regex_text='src="(?P<src>.+?)" alt="Photo"'
+        image_url = get_image_url_from_raw_html(content, regex_text)
     return image_url
     
 def is_twitpic_response(response):
@@ -86,7 +95,22 @@ def is_twitpic_response(response):
 def is_lockerz_response(response):
     location = response.get('content-location','')
     return location.find('http://lockerz.com') > -1
-    
+
+def is_yfrog_response(response):
+    location = response.get('content-location','')
+    return location.find('http://yfrog.com') > -1
+
+def is_molome_response(response):
+    location = response.get('content-location','')
+    return location.find('http://molo.me/') > -1
+
+
+#def is_pic_twitter_response(response):
+#    location = response.get('content-location','')
+#    is_twitter = location.find('http://twitter.com') > -1
+#    has_photo = location.find('/photo/') > -1
+#    return is_twitter and has_photo
+
 def find_url_in_tweet(text):
     words = text.split(' ')
     urls = [ word for word in words if word.count('http://') ]

@@ -135,14 +135,13 @@ Notes:
 .slideshow-thumbnails-inactive {
 	background-color: #FFF;
 	opacity: .5;
-}
-.slideshow-thumbnails {
-	top: -110px;
+}.slideshow-thumbnails {
+	bottom: -110px;
 	height: 110px;
 	left: 0;
 	position: absolute;
 	width: 100%;
-	overflow: auto;	
+	overflow: auto;
 }
 .slideshow-thumbnails ul {
 	height: 90px;
@@ -151,8 +150,8 @@ Notes:
 	top: 0;
 	width: 405px;
 }
-.slideshow {
-	margin-top: 110px;
+.slideshow{
+	margin-bottom:110px;
 }
 /**
 HTML:
@@ -263,4 +262,26 @@ Notes:
 	background-image: url(../images/controller-prev.gif);
 	left: 65px;
 	width: 28px;
+}
+/**
+HTML:
+	<div class="slideshow-loader" />
+	
+Notes:
+	Customize the hidden / visible classes to affect the loader animation.
+*/
+
+.slideshow-loader {
+	height: 28px;
+	right: 0;
+	position: absolute;
+	top: 0;
+	width: 28px;
+	z-index: 10001;
+}
+.slideshow-loader-hidden {
+	opacity: 0;
+}
+.slideshow-loader-visible {
+	opacity: 1;
 }
