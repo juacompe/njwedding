@@ -62,6 +62,12 @@ class TestFindImageUrlInPage(TestCase):
         expected_url = 'http://a2.img.mobypicture.com/2ea0c3d9b51adeb8e12245db4eebab3a_view.jpg'
         self.assertEqual(expected_url, image_url)
 
+    def test_find_image_url_in_owly_page__found(self):
+        page_url = 'http://ow.ly/i/e0gW'
+        image_url = find_image_url_in_page(page_url)
+        expected_url = 'http://static.ow.ly/photos/normal/e0gW.jpg'
+        self.assertEqual(expected_url, image_url)
+
 #    def test_find_image_url_in_pic_twitter_page__found(self):
 #        page_url = 'http://twitter.com/#!/igoyz/status/114975438018842624/photo/1'
 #        image_url = find_image_url_in_page(page_url)
