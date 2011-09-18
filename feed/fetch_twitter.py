@@ -86,6 +86,30 @@ def find_image_url_in_page(url):
     elif is_molome_response(response):
         regex_text='src="(?P<src>.+?)" alt="Photo"'
         image_url = get_image_url_from_raw_html(content, regex_text)
+    elif is_picplz_response(response):
+        regex_text='src="(?P<src>.+?)" width="\d+" height="\d+" id="mainImage"'
+        image_url = get_image_url_from_raw_html(content, regex_text)
+    elif is_instagram_response(response):
+        regex_text='class="photo" src="(?P<src>.+?)"'
+        image_url = get_image_url_from_raw_html(content, regex_text)
+    elif is_flickr_response(response):
+        regex_text='src="(?P<src>.+?)" alt="photo"'
+        image_url = get_image_url_from_raw_html(content, regex_text)
+    elif is_twitgoo_response(response):
+        regex_text='id="fullsize" src="(?P<src>.+?)"'
+        image_url = get_image_url_from_raw_html(content, regex_text)
+    elif is_imgly_response(response):
+        regex_text='id="the-image" src="(?P<src>.+?)"'
+        image_url = get_image_url_from_raw_html(content, regex_text)
+    elif is_mobypicture_response(response):
+        regex_text='src="(?P<src>.+?)" id="main_picture"'
+        image_url = get_image_url_from_raw_html(content, regex_text)
+    elif is_owly_response(response):
+        regex_text='</?a+\s+href+[^>]+title="View original size"+[^>]*>+\s+</?img\s+src="(?P<src>.+?)"'
+        image_url = get_image_url_from_raw_html(content, regex_text)
+    elif is_brizzly_response(response):
+        regex_text='</?div+\s+class="picture r"+[^>]*>+\s+</?a+\s+href+[^>]*><img+\s+src="(?P<src>.+?)"'
+        image_url = get_image_url_from_raw_html(content, regex_text)
     return image_url
     
 def is_twitpic_response(response):
@@ -102,9 +126,39 @@ def is_yfrog_response(response):
 
 def is_molome_response(response):
     location = response.get('content-location','')
-    return location.find('http://molo.me/') > -1
+    return location.find('http://molo.me') > -1
 
+def is_picplz_response(response):
+    location = response.get('content-location','')
+    return location.find('http://picplz.com') > -1
 
+def is_instagram_response(response):
+    location = response.get('content-location','')
+    return location.find('http://instagr.am/') > -1
+
+def is_flickr_response(response):
+    location = response.get('content-location','')
+    return location.find('http://www.flickr.com') > -1
+
+def is_twitgoo_response(response):
+    location = response.get('content-location','')
+    return location.find('http://twitgoo.com/') > -1
+
+def is_imgly_response(response):
+    location = response.get('content-location','')
+    return location.find('http://img.ly') > -1
+
+def is_mobypicture_response(response):
+    location = response.get('content-location','')
+    return location.find('http://www.mobypicture.com') > -1
+
+def is_owly_response(response):
+    location = response.get('content-location','')
+    return location.find('http://ow.ly') > -1
+
+def is_brizzly_response(response):
+    location = response.get('content-location','')
+    return location.find('http://brizzly.com') > -1
 #def is_pic_twitter_response(response):
 #    location = response.get('content-location','')
 #    is_twitter = location.find('http://twitter.com') > -1
