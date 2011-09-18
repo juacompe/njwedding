@@ -74,11 +74,18 @@ def find_image_url_in_page(url):
     if is_twitpic_response(response):
         regex_text='id="photo-display" src="(?P<src>.+?)"'
         image_url = get_image_url_from_raw_html(content, regex_text)
+    elif is_lockerz_response(response):
+        regex_text='id="photo" src="(?P<src>.+?)"'
+        image_url = get_image_url_from_raw_html(content, regex_text)
     return image_url
     
 def is_twitpic_response(response):
     location = response.get('content-location', '')
     return location.find('http://twitpic.com') > -1
+
+def is_lockerz_response(response):
+    location = response.get('content-location','')
+    return location.find('http://lockerz.com') > -1
     
 def find_url_in_tweet(text):
     words = text.split(' ')
