@@ -21,3 +21,11 @@
     width: 100%;
     font-size: 80%;
 }
+
+.slideshow-thumbnails ul {
+    width: 1024px!important;
+}
+
+.slideshow-thumbnails ul li {
+    width: auto!important;
+}
