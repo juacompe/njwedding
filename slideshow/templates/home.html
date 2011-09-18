@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
 {% block extra_head %}
-    <script type="text/javascript" src="{{STATIC_URL}}js/mootools.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}js/slideshow.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}js/visualslideshow.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}engine/js/mootools.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}engine/js/slideshow.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}engine/js/visualslideshow.js"></script>
     <link type="text/css" rel="stylesheet" href="{{STATIC_URL}}css/all.css" media="screen" />
-    <link type="text/css" rel="stylesheet" href="{{STATIC_URL}}css/slideshow.css" media="screen" />
     <link type="text/css" rel="stylesheet" href="{{STATIC_URL}}css/vibrant.css" media="screen" />
+    <link type="text/css" rel="stylesheet" href="{{STATIC_URL}}engine/css/slideshow.css" media="screen" />
 {% endblock %}
 
 {% block body %}
@@ -22,7 +22,7 @@
   {% for image in images %}
     <a href="{{IMAGE_URL}}{{image}}">
     <img id="slide-{{ forloop.counter }}" src="{{IMAGE_URL}}{{image}}" 
-         alt="Flowers at Amsterdam" /></a>
+         alt="Tweet photos tagged with #njwedding" /></a>
   {% endfor %}
   </div>
 
@@ -30,7 +30,7 @@
   <ul>
   {% for image in images %}
     <li><a href="#slide-{{ forloop.counter }}">
-        <img src="{{THUMBNAIL_URL}}{{image}}" alt="Flowers at Amsterdam" /></a>
+        <img src="{{THUMBNAIL_URL}}{{image}}" alt="Tweet photos tagged with #njwedding" /></a>
     </li>
   {% endfor %}
   </ul>
