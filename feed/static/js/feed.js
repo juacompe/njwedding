@@ -37,7 +37,13 @@ function feed_to_html(feed_items) {
         var str = item.from_user + " : " + item.text;
         var msg = $("<p/>").text(str);
         var created_at = $("<p/>").text(item.created_at.toString());
-        var element = $("<div/>")
+        var element = $("<div/>");
+
+        // set class for each element
+        profile.attr("class", "profile"); 
+        msg.attr("class", "msg");
+        created_at.attr("class", "created_at");
+
         profile.appendTo(element);
         msg.appendTo(element);
         created_at.appendTo(element);
