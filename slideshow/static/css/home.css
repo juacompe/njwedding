@@ -1,0 +1,31 @@
+.tweets {
+    float: left;
+    margin-top: 80px;
+    margin-left: 100px;
+    width: 30%;
+}
+
+.profile {
+    float: left;
+}
+
+.msg {
+    float: left;
+    width: 70%;
+    padding-left: 3px;
+    color: white;
+}
+
+.created_at {
+    float: left;
+    width: 100%;
+    font-size: 80%;
+}
+
+.slideshow-thumbnails ul {
+    width: 1024px!important;
+}
+
+.slideshow-thumbnails ul li {
+    width: auto!important;
+}
