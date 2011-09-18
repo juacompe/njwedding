@@ -1,7 +1,8 @@
 .tweets {
     float: left;
     margin-top: 80px;
-    width: 40%;
+    margin-left: 100px;
+    width: 30%;
 }
 
 .profile {
@@ -19,4 +20,12 @@
     float: left;
     width: 100%;
     font-size: 80%;
+}
+
+.slideshow-thumbnails ul {
+    width: 640px!important;
+}
+
+.slideshow-thumbnails ul li {
+    width: auto!important;
 }
