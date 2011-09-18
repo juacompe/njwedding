@@ -5,7 +5,7 @@ from feed.regex import get_image_url_from_raw_html
 from httplib import BadStatusLine
 from httplib2 import Http, ServerNotFoundError
 from json import loads
-from slideshow.image_utils import download_all 
+from storage.image_utils import download_all 
 import logging
 
 client = Http()

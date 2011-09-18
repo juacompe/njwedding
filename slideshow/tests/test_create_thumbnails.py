@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.core.files.storage import default_storage
 from django.test import TestCase
-from slideshow.image_utils import create_thumbnail
+from storage.image_utils import create_thumbnail
 
 class TestCreateThumbnail(TestCase):
     def test_thumbnail_exists_after_created(self):
