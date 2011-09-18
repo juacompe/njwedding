@@ -19,9 +19,9 @@ def create_thumbnail(image_name):
     image = Image.open(image_path)
     image.thumbnail(THUMBNAIL_SIZE, Image.ANTIALIAS)
     thumbnail_path = default_storage.path(THUMBNAIL_PATH + image_name)
-    if (image_path.lower()).find('jpg') <= -1:
-        thumbnail_path=thumbnail_path+'.jpg'
-    image.save(thumbnail_path)
+    #if (image_path.lower()).find('jpg') <= -1:
+    #    thumbnail_path=thumbnail_path+'.jpg'
+    image.save(thumbnail_path,'JPEG')
     return thumbnail_path
 
 def save_image(image_name, content):
