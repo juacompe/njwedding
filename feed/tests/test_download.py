@@ -1,6 +1,6 @@
 from django.core.files.storage import default_storage
 from django.test import TestCase
-from feed.fetch_twitter import download
+from slideshow.image_utils import download
 from slideshow.image_utils import TWITTER_IMAGE_PATH
 
 class TestDownload(TestCase):
