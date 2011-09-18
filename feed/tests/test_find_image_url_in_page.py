@@ -50,6 +50,18 @@ class TestFindImageUrlInPage(TestCase):
         expected_url = 'http://i54.twitgoo.com/1zpp35u.jpg'
         self.assertEqual(expected_url, image_url)
 
+    def test_find_image_url_in_imgly_page__found(self):
+        page_url = 'http://img.ly/8mZP'
+        image_url = find_image_url_in_page(page_url)
+        expected_url = 'http://s3.amazonaws.com/imgly_production/1995025/large.jpg'
+        self.assertEqual(expected_url, image_url)
+
+    def test_find_image_url_in_mobypicture_page__found(self):
+        page_url = 'http://www.mobypicture.com/user/marnixamsterdam/view/10743416'
+        image_url = find_image_url_in_page(page_url)
+        expected_url = 'http://a2.img.mobypicture.com/2ea0c3d9b51adeb8e12245db4eebab3a_view.jpg'
+        self.assertEqual(expected_url, image_url)
+
 #    def test_find_image_url_in_pic_twitter_page__found(self):
 #        page_url = 'http://twitter.com/#!/igoyz/status/114975438018842624/photo/1'
 #        image_url = find_image_url_in_page(page_url)
