@@ -11,6 +11,8 @@
         </style><![endif]-->
  
         {% block extra_head_base %}
+            <script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.4.4.min.js"></script>
+            <script type="text/javascript" src="{{STATIC_URL}}js/jquery.updater.js"></script>
             {% block extra_head %}{% endblock %}
         {% endblock %}
     </head>
