@@ -48,8 +48,8 @@ Notes:
 */
 
 .slideshow {
-	width: 504px;
-	height: 384px;
+	width: 664px;
+	height: 504px;
 	margin: 0 auto;
 	background: url("../images/back.png") no-repeat scroll 0 0 transparent; 
 }
@@ -69,8 +69,8 @@ Notes:
 */
 
 .slideshow-images {
-	width: 480px;
-	height: 360px;
+	width: 640px;
+	height: 480px;
 	left: 12px;
 	top: 12px;
 }		
@@ -173,7 +173,7 @@ Notes:
 	overflow: hidden;
 	position: absolute;
 	padding: 0 10px;
-	width: 460px;	/* 100% */
+	width: 620px;	/* 100% */
 	z-index: 10000;
 }
 .slideshow-captions-hidden {
