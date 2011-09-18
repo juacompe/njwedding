@@ -38,6 +38,12 @@ class TestFindImageUrlInPage(TestCase):
         expected_url = 'http://images.instagram.com/media/2011/09/18/4df983fd4f6d4496bf0a496ab30f74e0_7.jpg'
         self.assertEqual(expected_url, image_url)
 
+    def test_find_image_url_in_flickr_page__found(self):
+        page_url = 'http://www.flickr.com/photos/63701352@N06/6158805817/'
+        image_url = find_image_url_in_page(page_url)
+        expected_url = 'http://farm7.static.flickr.com/6151/6158805817_2c547be8aa_z.jpg'
+        self.assertEqual(expected_url, image_url)
+
 #    def test_find_image_url_in_pic_twitter_page__found(self):
 #        page_url = 'http://twitter.com/#!/igoyz/status/114975438018842624/photo/1'
 #        image_url = find_image_url_in_page(page_url)

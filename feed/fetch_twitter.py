@@ -92,6 +92,9 @@ def find_image_url_in_page(url):
     elif is_instagram_response(response):
         regex_text='class="photo" src="(?P<src>.+?)"'
         image_url = get_image_url_from_raw_html(content, regex_text)
+    elif is_flickr_response(response):
+        regex_text='src="(?P<src>.+?)" alt="photo"'
+        image_url = get_image_url_from_raw_html(content, regex_text)
     return image_url
     
 def is_twitpic_response(response):
@@ -117,6 +120,10 @@ def is_picplz_response(response):
 def is_instagram_response(response):
     location = response.get('content-location','')
     return location.find('http://instagr.am/') > -1
+
+def is_flickr_response(response):
+    location = response.get('content-location','')
+    return location.find('http://www.flickr.com') > -1
 
 
 #def is_pic_twitter_response(response):
