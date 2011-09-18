@@ -1,5 +1,5 @@
 from django.test import TestCase
-from slideshow.image_utils import collected_images, TWITTER_IMAGE_PATH
+from storage.image_utils import collected_images, TWITTER_IMAGE_PATH
 from django.core.files.storage import default_storage
 
 class TestCollectedImages(TestCase):

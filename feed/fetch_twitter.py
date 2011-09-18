@@ -2,11 +2,14 @@ from django.conf import settings
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from feed.regex import get_image_url_from_raw_html
-from httplib2 import Http 
+from httplib import BadStatusLine
+from httplib2 import Http, ServerNotFoundError
 from json import loads
-from slideshow.image_utils import save_image
+from storage.image_utils import download_all 
+import logging
 
 client = Http()
+log = logging.getLogger(__name__)
 
 def fetch_twitter():
     response, content = fetch_tweets()
@@ -16,20 +19,6 @@ def fetch_twitter():
         image_urls = extract_urls_from_tweets(tweets)
         download_all(image_urls)
     
-def download_all(image_urls):
-    for image_url in image_urls:
-        download(image_url)
-
-def download(image_url):
-    response, content = client.request(image_url)
-    
-    if response.status == 200 and response.get('content-type', None) == 'image/jpeg':
-        image_url = image_url.split('?')[0] # chop the query string out
-        image_name = default_storage.get_valid_name(image_url) 
-        save_image(image_name, content)
-    else:
-        print '%s %s' % (response.status, response.get('content-type', None))
-
 def fetch_tweets():
     """
     Fetch tweets according to TWITTER_QUERY in django's settings and return
@@ -62,7 +51,15 @@ def extract_urls_from_tweets(tweets):
     for tweet in iter(tweets):
         urls = find_url_in_tweet(tweet)
         for url in iter(urls):
-            image_url = find_image_url_in_page(url)
+            try:
+                image_url = find_image_url_in_page(url)
+            except ServerNotFoundError, e:
+                log.error('fail to find photo in url %s' % url)
+                log.exception(e)
+            except BadStatusLine, e:
+                log.error('fail to find photo in url %s' % url)
+                log.exception(e)
+                
             if image_url is not None:
                 image_urls.append(image_url)
     return image_urls
