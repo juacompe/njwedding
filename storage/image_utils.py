@@ -19,6 +19,8 @@ def create_thumbnail(image_name):
     image = Image.open(image_path)
     image.thumbnail(THUMBNAIL_SIZE, Image.ANTIALIAS)
     thumbnail_path = default_storage.path(THUMBNAIL_PATH + image_name)
+    if (image_path.lower()).find('jpg') <= -1:
+        thumbnail_path=thumbnail_path+'.jpg'
     image.save(thumbnail_path)
     return thumbnail_path
 
@@ -28,7 +30,10 @@ def save_image(image_name, content):
     # verify occationally cause image.fp to be None -*-
     image = Image.open(ContentFile(StringIO(content).buf))
     image_path = default_storage.path(TWITTER_IMAGE_PATH + image_name)
-    image.save(image_path)
+    #if (image_path.lower()).find('jpg') <= -1:
+    #    image_path=image_path+'.jpg'
+    image.save(image_path,'JPEG')
+    #image.save(image_path)
     create_thumbnail(image_name)
 
 def download_all(image_urls):
@@ -38,7 +43,8 @@ def download_all(image_urls):
 def download(image_url):
     response, content = client.request(image_url)
     
-    if response.status == 200 and response.get('content-type', None) == 'image/jpeg':
+    #if response.status == 200 and response.get('content-type', None) == 'image/jpeg':
+    if response.status == 200:
         image_url = image_url.split('?')[0] # chop the query string out
         image_name = default_storage.get_valid_name(image_url) 
         save_image(image_name, content)
