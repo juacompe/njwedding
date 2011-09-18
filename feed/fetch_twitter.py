@@ -1,8 +1,10 @@
 from django.conf import settings
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
+from feed.regex import get_image_url_from_raw_html
 from httplib2 import Http 
 from json import loads
+from slideshow.image_utils import save_image
 
 client = Http()
 
@@ -10,8 +12,24 @@ def fetch_twitter():
     response, content = fetch_tweets()
     if response.status == 200:
         write_to_file(content)
-        parse_tweets(loads(content))
+        tweets = parse_tweets(loads(content))
+        image_urls = extract_urls_from_tweets(tweets)
+        download_all(image_urls)
     
+def download_all(image_urls):
+    for image_url in image_urls:
+        download(image_url)
+
+def download(image_url):
+    response, content = client.request(image_url)
+    
+    if response.status == 200 and response.get('content-type', None) == 'image/jpeg':
+        image_url = image_url.split('?')[0] # chop the query string out
+        image_name = default_storage.get_valid_name(image_url) 
+        save_image(image_name, content)
+    else:
+        print '%s %s' % (response.status, response.get('content-type', None))
+
 def fetch_tweets():
     """
     Fetch tweets according to TWITTER_QUERY in django's settings and return
@@ -36,5 +54,37 @@ def write_to_file(content):
     path = default_storage.save('search.json', ContentFile(content))
 
 def parse_tweets(result_dict):
-    return result_dict
+    results = result_dict['results']
+    return [ tweet['text'] for tweet in results ]
+
+def extract_urls_from_tweets(tweets):
+    image_urls = []
+    for tweet in iter(tweets):
+        urls = find_url_in_tweet(tweet)
+        for url in iter(urls):
+            image_url = find_image_url_in_page(url)
+            if image_url is not None:
+                image_urls.append(image_url)
+    return image_urls
+
+def find_image_url_in_page(url):
+    """
+    Open the page, find the photo in the page, and return url of the photo 
+    image.
+    """
+    response, content = client.request(url)
+    image_url = None
+    if is_twitpic_response(response):
+        regex_text='id="photo-display" src="(?P<src>.+?)"'
+        image_url = get_image_url_from_raw_html(content, regex_text)
+    return image_url
     
+def is_twitpic_response(response):
+    location = response.get('content-location', '')
+    return location.find('http://twitpic.com') > -1
+    
+def find_url_in_tweet(text):
+    words = text.split(' ')
+    urls = [ word for word in words if word.count('http://') ]
+    return urls 
+
