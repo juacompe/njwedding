@@ -2,10 +2,15 @@ body{
     background-color: #03bdaf;
 }
 
-
-.page_title{
+#website_title{
+    margin-top: 24px;
+    margin-bottom: 7px;
+    margin-left: 8px;
     color: #ffffff;
     font-size: 40px;
+}
+#shortcut_menu_container{
+    float: right;
 }
 
 #page_header{
@@ -54,4 +59,29 @@ body{
 }
 #vlb{
     display:none;
+}
+
+#shortcut_menu_container{
+    color: white;
+    margin-right: 30px;
+    margin-top: 45px;
+}
+
+#shortcut_menu_container .each_menu{
+    float: right;
+    margin-left: 10px;
+    font-size: 9px;
+    text-transform: uppercase;
+}
+.view_map_icon,
+.add_to_calendar_icon{
+    width: 11px;
+    height: 17px;
+    background-image: url(../images/view_map.png);
+    float: left;
+    margin-right: 4px;
+}
+.add_to_calendar_icon{
+    background-image: url(../images/add_to_calendar.png);
+    width: 17px;
 }
