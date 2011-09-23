@@ -49,7 +49,7 @@ body{
 }
 .slideshow-captions{
     margin-left: 5px;  /*because we have 5px border*/
-    bottom: 15px; /* I was 20px, because we have 5px border*/
+    bottom: 7px; /* I was 20px, because we have 5px border*/
     left: 0;
 }
 #vlb{
