@@ -45,6 +45,7 @@ body{
 #show{
     float: left;
     left: 0;
+    
 }
 #show .slideshow-images{
     left: 0;
@@ -53,7 +54,7 @@ body{
     -webkit-box-shadow: 0px 1px 8px rgba(0, 0, 0, .5);
 }
 .slideshow-captions{
-    margin-left: 5px;  /*because we have 5px border*/
+    margin-left: 8px;  /*because we have 8px border*/
     bottom: 4px; /* I was 12px, because we have 8px border*/
     left: 0;
 }
