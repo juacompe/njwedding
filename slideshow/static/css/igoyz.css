@@ -130,3 +130,21 @@ p.created_at{
 p.msg{
     font-size: 12px;
 }
+
+#tweeter{
+    background-image: url(../images/bird.png);
+    width:77px;
+    height:65px;
+    position: absolute;
+    right: 20px;
+    top: 695px;
+    /*float:right;*/
+}
+#tweeter_tag{
+    background-image: url(../images/ngwedding_tag.png);
+    width:149px;
+    height:27px;
+    position: absolute;
+    right: 60px;
+    top: 735px;
+}
