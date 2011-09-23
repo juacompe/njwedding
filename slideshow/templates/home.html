@@ -1,19 +1,22 @@
-{% extends "base.html" %}
+{% extends "page.html" %}
 
 {% block extra_head %}
-    <script type="text/javascript" src="{{STATIC_URL}}js/mootools.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}js/slideshow.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}js/visualslideshow.js"></script>
+    {{ block.super }}
     <link type="text/css" rel="stylesheet" href="{{STATIC_URL}}css/all.css" media="screen" />
     <link type="text/css" rel="stylesheet" href="{{STATIC_URL}}css/slideshow.css" media="screen" />
     <link type="text/css" rel="stylesheet" href="{{STATIC_URL}}css/vibrant.css" media="screen" />
 {% endblock %}
 
-{% block body %}
+{% block script_defer %}
+    <script type="text/javascript" src="{{STATIC_URL}}js/mootools.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/slideshow.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/visualslideshow.js"></script>
+{% endblock %}
 
-<div id="content">
-<h3>Photos from #NJWedding</h3>
 
+
+
+{% block page_content %}
 <!-- Start VisualSlideShow.com BODY section -->
 <div id="show" class="slideshow" style="margin-left: -10px;">
 
@@ -40,5 +43,5 @@
 </div>
 <!-- End VisualSlideShow.com BODY section -->						
 
-</div>
-{% endblock %}
+
+{% endblock page_content%}
