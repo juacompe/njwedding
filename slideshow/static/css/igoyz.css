@@ -48,7 +48,10 @@ body{
     -webkit-box-shadow: 0px 1px 8px rgba(0, 0, 0, .5);
 }
 .slideshow-captions{
-    margin-left: 5px; /* because we have 5px border*/
+    margin-left: 5px;  /*because we have 5px border*/
     bottom: 15px; /* I was 20px, because we have 5px border*/
     left: 0;
+}
+#vlb{
+    display:none;
 }

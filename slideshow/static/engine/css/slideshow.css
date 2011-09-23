@@ -51,7 +51,7 @@ Notes:
 	width: 664px;
 	height: 504px;
 	margin: 0 auto;
-	background: url("../images/back.png") no-repeat scroll 0 0 transparent; 
+	/*background: url("../images/back.png") no-repeat scroll 0 0 transparent; */
 }
 .slideshow a img {
 	border: 0;
