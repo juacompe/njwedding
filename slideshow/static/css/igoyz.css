@@ -33,7 +33,7 @@ body{
     width:84px;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
-    border-radius: 4px;
+    border-radius: 4px 4px 4px 4px;
 }
 .slideshow{
     margin-top: 0;
@@ -70,8 +70,8 @@ body{
 
 #shortcut_menu_container .each_menu{
     float: right;
-    margin-left: 10px;
-    font-size: 9px;
+    margin-left: 18px;
+    font-size: 10px;
     text-transform: uppercase;
 }
 .view_map_icon,
@@ -103,8 +103,8 @@ body{
 #main_menu li{
     float: left;
     list-style-image: url(../images/heart.png);
-    margin-right:55px;
-    margin-left:55px;
+    margin-right:60px;
+    margin-left:60px;
 }
 
 #main_menu li a {
@@ -117,4 +117,16 @@ body{
 
 #main_menu li a:hover{
     text-decoration: none;
+}
+
+p.msg,
+p.created_at{
+    font-family: tahoma, lucida;
+}
+p.created_at{
+    font-size: 10px;
+    
+}
+p.msg{
+    font-size: 12px;
 }
