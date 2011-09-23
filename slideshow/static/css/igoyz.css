@@ -3,8 +3,52 @@ body{
 }
 
 
-
 .page_title{
     color: #ffffff;
-    font-size: 30px;
+    font-size: 40px;
+}
+
+#page_header{
+    border: 5px #ffffff solid;
+}
+
+#page_content,#page_footer{
+    border: 5px #ffffff solid;
+    border-top:  0 none;
+}
+#page_content{
+    padding-left: 12px;
+}
+#page_footer{
+    padding:  10px;
+    height: 84px;
+}
+.igoyz_logo{
+    height: 84px;
+    width:84px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+.slideshow{
+    margin-top: 0;
+}
+.slideshow-controller{
+    margin-top: 0;
+}
+
+#show{
+    float: left;
+    left: 0;
+}
+#show .slideshow-images{
+    left: 0;
+    border: 5px #ffffff solid;
+    -moz-box-shadow: 0px 1px 8px rgba(0, 0, 0, .5);
+    -webkit-box-shadow: 0px 1px 8px rgba(0, 0, 0, .5);
+}
+.slideshow-captions{
+    margin-left: 5px; /* because we have 5px border*/
+    bottom: 15px; /* I was 20px, because we have 5px border*/
+    left: 0;
 }
