@@ -1,6 +1,6 @@
 from django.test import TestCase
 from mock import Mock
-from slideshow import image_utils
+from storage import image_utils
 
 class TestHome(TestCase):
     def setUp(self):

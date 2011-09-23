@@ -25,7 +25,7 @@
   {% for image in images %}
     <a href="{{IMAGE_URL}}{{image}}">
     <img id="slide-{{ forloop.counter }}" src="{{IMAGE_URL}}{{image}}" 
-         alt="Flowers at Amsterdam" /></a>
+         alt="Tweet photos tagged with #njwedding" /></a>
   {% endfor %}
   </div>
 
@@ -33,7 +33,7 @@
   <ul>
   {% for image in images %}
     <li><a href="#slide-{{ forloop.counter }}">
-        <img src="{{THUMBNAIL_URL}}{{image}}" alt="Flowers at Amsterdam" /></a>
+        <img src="{{THUMBNAIL_URL}}{{image}}" alt="Tweet photos tagged with #njwedding" /></a>
     </li>
   {% endfor %}
   </ul>
@@ -42,6 +42,7 @@
 <a id="vlb" href="http://visualslideshow.com">HTML Photo Slideshow by VisualSlideshow.com v1.0</a>
 </div>
 <!-- End VisualSlideShow.com BODY section -->						
-
+<div id="output" class="tweets"></div>
 
 {% endblock page_content%}
+
