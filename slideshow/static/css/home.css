@@ -5,6 +5,8 @@
     /*margin-top: 23px;*/
     margin-left: 15px;
     text-align: left;
+    height: 500px;
+    overflow-y: scroll;
     
 }
 
