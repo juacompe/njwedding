@@ -48,13 +48,13 @@ body{
 }
 #show .slideshow-images{
     left: 0;
-    border: 5px #ffffff solid;
+    border: 8px #ffffff solid;
     -moz-box-shadow: 0px 1px 8px rgba(0, 0, 0, .5);
     -webkit-box-shadow: 0px 1px 8px rgba(0, 0, 0, .5);
 }
 .slideshow-captions{
     margin-left: 5px;  /*because we have 5px border*/
-    bottom: 7px; /* I was 20px, because we have 5px border*/
+    bottom: 4px; /* I was 12px, because we have 8px border*/
     left: 0;
 }
 #vlb{
@@ -84,4 +84,36 @@ body{
 .add_to_calendar_icon{
     background-image: url(../images/add_to_calendar.png);
     width: 17px;
+}
+
+#main_menu{
+    text-align: center;
+    width: 750px;
+    margin-left:auto;
+    margin-right: auto;
+}
+
+#main_menu ul{
+    margin-top: 0;
+    padding-top: 14px;
+    padding-left:0;
+
+}
+#main_menu li{
+    float: left;
+    list-style-image: url(../images/heart.png);
+    margin-right:55px;
+    margin-left:55px;
+}
+
+#main_menu li a {
+    font-family: Lucida Grande;
+    text-transform: uppercase;
+    display: block;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+#main_menu li a:hover{
+    text-decoration: none;
 }
