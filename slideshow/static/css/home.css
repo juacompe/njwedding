@@ -17,7 +17,9 @@
     float:left;
 }
 .msg {
+    margin-top: 20px;
     margin-left:60px;
+    margin-bottom: 30px;
     padding-left: 3px;
     color: black;
 }
