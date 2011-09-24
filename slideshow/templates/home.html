@@ -1,24 +1,29 @@
-{% extends "base.html" %}
+{% extends "page.html" %}
 
 {% block extra_head %}
-    <script type="text/javascript" src="{{STATIC_URL}}engine/js/mootools.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}engine/js/slideshow.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}engine/js/visualslideshow.js"></script>
+    {{ block.super }}
     <link type="text/css" rel="stylesheet" href="{{STATIC_URL}}css/all.css" media="screen" />
     <link type="text/css" rel="stylesheet" href="{{STATIC_URL}}css/vibrant.css" media="screen" />
     <link type="text/css" rel="stylesheet" href="{{STATIC_URL}}css/home.css" media="screen" />
     <link type="text/css" rel="stylesheet" href="{{STATIC_URL}}engine/css/slideshow.css" media="screen" />
+
+{% endblock %}
+
+{% block script_defer %}
+    <script type="text/javascript" src="{{STATIC_URL}}engine/js/mootools.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}engine/js/slideshow.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}engine/js/visualslideshow.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/common.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/feed.js"></script>
 {% endblock %}
 
-{% block body %}
 
-<div id="content">
-<h3>Photos from #NJWedding</h3>
+
+
+{% block page_content %}
 
 <!-- Start VisualSlideShow.com BODY section -->
-<div id="show" class="slideshow" style="margin-left: -10px;">
+<div id="show" class="slideshow" >
 
   <div class="slideshow-images">
 
@@ -41,7 +46,11 @@
 
 <a id="vlb" href="http://visualslideshow.com">HTML Photo Slideshow by VisualSlideshow.com v1.0</a>
 </div>
-<!-- End VisualSlideShow.com BODY section -->						
-</div>
-<div id="output" class="tweets"></div>
-{% endblock %}
+<!-- End VisualSlideShow.com BODY section -->
+    <div id="output" class="tweets">
+        hello i'm Chanita
+    </div><!--id="output" class="tweets"-->
+
+
+{% endblock page_content%}
+

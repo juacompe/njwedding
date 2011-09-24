@@ -9,11 +9,12 @@
                 zoom: 1; /* trigger hasLayout */
             }
         </style><![endif]-->
- 
+
         {% block extra_head_base %}
             <script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.4.4.min.js"></script>
             <script type="text/javascript" src="{{STATIC_URL}}js/jquery.updater.js"></script>
             {% block extra_head %}{% endblock %}
+            <link type="text/css" rel="stylesheet" href="{{STATIC_URL}}css/igoyz.css" media="screen" />
         {% endblock %}
     </head>
     <body class="{% block body_class %}{% endblock %}">

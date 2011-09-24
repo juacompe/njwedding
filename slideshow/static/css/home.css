@@ -1,19 +1,25 @@
 .tweets {
-    float: left;
-    margin-top: 80px;
-    margin-left: 100px;
-    width: 30%;
+    position:absolute;
+    left: 680px;
+    margin-right: 30px;
+    /*margin-top: 23px;*/
+    margin-left: 15px;
+    text-align: left;
+    height: 510px;
+    overflow-y: scroll;
+    
 }
 
 .profile {
     float: left;
 }
-
+.tweets img{
+    float:left;
+}
 .msg {
-    float: left;
-    width: 70%;
+    margin-left:60px;
     padding-left: 3px;
-    color: white;
+    color: black;
 }
 
 .created_at {
