@@ -2,19 +2,24 @@
 
 {% block extra_head %}
     {{ block.super }}
+
     <link type="text/css" rel="stylesheet" href="{{STATIC_URL}}css/all.css" media="screen" />
     <link type="text/css" rel="stylesheet" href="{{STATIC_URL}}css/vibrant.css" media="screen" />
     <link type="text/css" rel="stylesheet" href="{{STATIC_URL}}css/home.css" media="screen" />
     <link type="text/css" rel="stylesheet" href="{{STATIC_URL}}engine/css/slideshow.css" media="screen" />
-
 {% endblock %}
 
 {% block script_defer %}
-    <script type="text/javascript" src="{{STATIC_URL}}engine/js/mootools.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}engine/js/slideshow.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}engine/js/visualslideshow.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/common.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/feed.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}galleria/galleria-1.2.5.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}galleria/themes/classic/galleria.classic.min.js"></script>
+    <script>
+    $('#gallery').galleria({
+        width:500,
+        height:500
+    });
+    </script>
 {% endblock %}
 
 
@@ -22,31 +27,15 @@
 
 {% block page_content %}
 
-<!-- Start VisualSlideShow.com BODY section -->
-<div id="show" class="slideshow" >
+    <div id="gallery">
+        {% for image in images %}
+        <a href="{{IMAGE_URL}}{{image}}">
+            <img src="{{THUMBNAIL_URL}}{{image}}" alt="Tweet photos tagged with #njwedding"
+                 title="Tweet photos tagged with #njwedding"/>
+        </a>
+        {% endfor %}
+    </div>
 
-  <div class="slideshow-images">
-
-  {% for image in images %}
-    <a href="{{IMAGE_URL}}{{image}}">
-    <img id="slide-{{ forloop.counter }}" src="{{IMAGE_URL}}{{image}}" 
-         alt="Tweet photos tagged with #njwedding" /></a>
-  {% endfor %}
-  </div>
-
-  <div class="slideshow-thumbnails">
-  <ul>
-  {% for image in images %}
-    <li><a href="#slide-{{ forloop.counter }}">
-        <img src="{{THUMBNAIL_URL}}{{image}}" alt="Tweet photos tagged with #njwedding" /></a>
-    </li>
-  {% endfor %}
-  </ul>
-  </div>
-
-<a id="vlb" href="http://visualslideshow.com">HTML Photo Slideshow by VisualSlideshow.com v1.0</a>
-</div>
-<!-- End VisualSlideShow.com BODY section -->
     <div id="output" class="tweets">
         hello i'm Chanita
     </div><!--id="output" class="tweets"-->
