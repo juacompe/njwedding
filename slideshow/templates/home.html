@@ -4,14 +4,13 @@
     {{ block.super }}
 
     <link type="text/css" rel="stylesheet" href="{{STATIC_URL}}css/all.css" media="screen" />
-    <link type="text/css" rel="stylesheet" href="{{STATIC_URL}}css/vibrant.css" media="screen" />
     <link type="text/css" rel="stylesheet" href="{{STATIC_URL}}css/home.css" media="screen" />
-    <link type="text/css" rel="stylesheet" href="{{STATIC_URL}}engine/css/slideshow.css" media="screen" />
 {% endblock %}
 
 {% block script_defer %}
     <script type="text/javascript" src="{{STATIC_URL}}js/common.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/feed.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/loop_refresh.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}galleria/galleria-1.2.5.min.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}galleria/themes/classic/galleria.classic.min.js"></script>
     <script>
@@ -21,6 +20,10 @@
         autoplay:7000,
         transition:"fade"
     });
+    </script>
+    
+    <script>
+    delayed_refresh();
     </script>
 {% endblock %}
 
