@@ -14,6 +14,8 @@ log = logging.getLogger(__name__)
 
 def collected_images():
     dir_names, file_names = default_storage.listdir(TWITTER_IMAGE_PATH)
+    compare_by_created_time = lambda(name): default_storage.created_time(TWITTER_IMAGE_PATH + name)
+    file_names.sort(key=compare_by_created_time, reverse=True)
     return file_names 
 
 def create_thumbnail(image_name):
