@@ -5,14 +5,14 @@ from storage.image_utils import create_thumbnail
 
 class TestCreateThumbnail(TestCase):
     def test_thumbnail_exists_after_created(self):
-        image_name = '132883093_49660b8f2a_z.jpg'
+        image_name = 'test.jpg'
         
         path = create_thumbnail(image_name) 
 
         self.assertTrue(default_storage.exists(path))
 
     def test_thumbnail_created_at_right_path(self):
-        image_name = '132883093_49660b8f2a_z.jpg'
+        image_name = 'test.jpg'
 
         created_path = create_thumbnail(image_name) 
 

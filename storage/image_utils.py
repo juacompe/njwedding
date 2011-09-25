@@ -1,14 +1,16 @@
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
-from httplib2 import Http
+from httplib2 import Http, RelativeURIError
 from PIL import Image
 from StringIO import StringIO
+import logging
 
 TWITTER_IMAGE_PATH = 'collected_twitter_images/'
 THUMBNAIL_PATH = TWITTER_IMAGE_PATH + 'thumbnails/' 
 THUMBNAIL_SIZE = 60, 38
 
 client = Http()
+log = logging.getLogger(__name__)
 
 def collected_images():
     dir_names, file_names = default_storage.listdir(TWITTER_IMAGE_PATH)
@@ -38,7 +40,10 @@ def save_image(image_name, content):
 
 def download_all(image_urls):
     for image_url in image_urls:
-        download(image_url)
+        try:
+            download(image_url)
+        except RelativeURIError:
+            log.error('cannot d/l image from url %s' % image_url)
 
 def download(image_url):
     response, content = client.request(image_url)

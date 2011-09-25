@@ -35,7 +35,7 @@ class TestFindImageUrlInPage(TestCase):
     def test_find_image_url_in_instagram_page__found(self):
         page_url = 'http://instagr.am/p/Ncasw/'
         image_url = find_image_url_in_page(page_url)
-        expected_url = 'http://images.instagram.com/media/2011/09/18/4df983fd4f6d4496bf0a496ab30f74e0_7.jpg'
+        expected_url = 'http://distillery.s3.amazonaws.com/media/2011/09/18/4df983fd4f6d4496bf0a496ab30f74e0_7.jpg'
         self.assertEqual(expected_url, image_url)
 
     def test_find_image_url_in_flickr_page__found(self):
