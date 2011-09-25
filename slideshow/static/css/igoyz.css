@@ -35,32 +35,6 @@ body{
     -webkit-border-radius: 4px;
     border-radius: 4px 4px 4px 4px;
 }
-.slideshow{
-    margin-top: 0;
-}
-.slideshow-controller{
-    margin-top: 0;
-}
-
-#show{
-    float: left;
-    left: 0;
-    
-}
-#show .slideshow-images{
-    left: 0;
-    border: 8px #ffffff solid;
-    -moz-box-shadow: 0px 1px 8px rgba(0, 0, 0, .5);
-    -webkit-box-shadow: 0px 1px 8px rgba(0, 0, 0, .5);
-}
-.slideshow-captions{
-    margin-left: 8px;  /*because we have 8px border*/
-    bottom: 4px; /* I was 12px, because we have 8px border*/
-    left: 0;
-}
-#vlb{
-    display:none;
-}
 
 #shortcut_menu_container{
     color: white;

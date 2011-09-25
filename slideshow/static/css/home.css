@@ -1,5 +1,6 @@
 .tweets {
     position:absolute;
+    top: 200px;
     left: 680px;
     margin-right: 30px;
     /*margin-top: 23px;*/
@@ -30,10 +31,6 @@
     font-size: 80%;
 }
 
-.slideshow-thumbnails ul {
-    width: 640px!important;
-}
-
-.slideshow-thumbnails ul li {
-    width: auto!important;
+.galleria-container {
+    background: none!important;
 }
