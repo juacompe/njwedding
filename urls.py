@@ -8,7 +8,7 @@ from django.conf.urls.defaults import patterns, include, url
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'slideshow.views.home', name='home'),
-    # url(r'^njwedding/', include('njwedding.foo.urls')),
+    url(r'^api/new_tweets/$', 'feed.views.new_tweets', name='new_tweets'),
     url(r'^testjs/', include('testjs.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
