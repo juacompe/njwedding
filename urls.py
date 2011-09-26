@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.conf.urls.defaults import patterns, include, url
+from django.views.generic.simple import direct_to_template
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -9,6 +10,7 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'slideshow.views.home', name='home'),
     url(r'^api/new_tweets/$', 'feed.views.new_tweets', name='new_tweets'),
+    (r'^about/$',direct_to_template, {'template': 'about.html'}),
     url(r'^testjs/', include('testjs.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
