@@ -42,11 +42,18 @@ body{
     margin-top: 45px;
 }
 
-#shortcut_menu_container .each_menu{
+#shortcut_menu_container .each_menu, #shortcut_menu_container .each_menu a{
     float: right;
     margin-left: 18px;
     font-size: 10px;
     text-transform: uppercase;
+    color: white;
+    text-decoration: none;
+    line-height: 17px;
+}
+#shortcut_menu_container .each_menu a:hover{
+    text-decoration: none;
+    color: white;
 }
 .view_map_icon,
 .add_to_calendar_icon{
@@ -87,6 +94,7 @@ body{
     display: block;
     font-size: 18px;
     color: #ffffff;
+    text-decoration: none;
 }
 
 #main_menu li a:hover{
