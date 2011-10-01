@@ -29,13 +29,14 @@ def create_thumbnail(image_name):
     return thumbnail_path
 
 def save_image(image_name, content):
+    if not image_name.lower().endswith('.jpg'):
+        image_name = image_name+'.jpg'
     verifying_image = Image.open(ContentFile(StringIO(content).buf))
     verifying_image.verify()
     # verify occationally cause image.fp to be None -*-
     image = Image.open(ContentFile(StringIO(content).buf))
     image_path = default_storage.path(TWITTER_IMAGE_PATH + image_name)
-    #if (image_path.lower()).find('jpg') <= -1:
-    #    image_path=image_path+'.jpg'
+
     image.save(image_path,'JPEG')
     #image.save(image_path)
     create_thumbnail(image_name)
