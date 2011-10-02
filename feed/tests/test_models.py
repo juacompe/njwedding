@@ -11,9 +11,10 @@ class TestTweet(TestCase):
                        'from_user': "juacompe",
                      }
         created_at_str = tweet_json['created_at'] + ' UTC' # +0000 = UTC
-        created_at = datetime.strptime(created_at_str, '"%a, %d %b %Y %H:%M:%S +0000 %Z')
+        created_at = datetime.strptime(created_at_str, '%a, %d %b %Y %H:%M:%S +0000 %Z')
         tweet_json.update({'created_at': created_at})
         tweet = Tweet(**tweet_json) 
         tweet.save()
+        self.assertTrue(tweet.id)
 
 

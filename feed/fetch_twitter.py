@@ -1,6 +1,8 @@
+from datetime import datetime
 from django.conf import settings
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
+from feed.models import Tweet
 from feed.regex import get_image_url_from_raw_html
 from httplib import BadStatusLine
 from httplib2 import Http, ServerNotFoundError
@@ -44,7 +46,25 @@ def write_to_file(content):
 
 def parse_tweets(result_dict):
     results = result_dict['results']
-    return [ tweet['text'] for tweet in results ]
+    messages = []
+    for result in results:
+        # update timezone of created_at
+        created_at_str = result['created_at'] + ' UTC' # +0000 = UTC
+        created_at = datetime.strptime(created_at_str, '%a, %d %b %Y %H:%M:%S +0000 %Z')
+        result.update({'created_at': created_at})
+
+        # remove ignored data
+        tweet_json = {}
+        tweet_json['text'] = result['text']
+        tweet_json['created_at'] = result['created_at']
+        tweet_json['id_str'] = result['id_str']
+        tweet_json['profile_image_url'] = result['profile_image_url']
+        tweet_json['from_user'] = result['from_user']
+
+        tweet = Tweet(**tweet_json)
+        tweet.save()
+        messages.append(result['text'])
+    return messages
 
 def extract_urls_from_tweets(tweets):
     image_urls = []
