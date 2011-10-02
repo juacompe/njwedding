@@ -21,7 +21,6 @@ class TestViews(TestCase):
                                   u'from_user': u'juacompe',
                                   u'profile_image_url': u'http://a0.twimg.com/profile_images/1097051928/mypic2_normal.jpeg',
                                   u'text': u'@roofimon lets see if wp really anti-TDD',
-                                  u'photo_url': None 
                                  },
                                  {u'id_str': u'117540086551289857',
                                   u'id': 2,
@@ -29,7 +28,6 @@ class TestViews(TestCase):
                                   u'from_user': u'juacompe',
                                   u'profile_image_url': u'http://a0.twimg.com/profile_images/1097051928/mypic2_normal.jpeg',
                                   u'text': u'cleaned... http://t.co/48hQmTeM',
-                                  u'photo_url': u'http://localhost:8001/media/collected_twitter_images/httpmolo.mephotoswebbig0fkKTb'
                                  }
                              ]}
         self.assertDictEqual(expected_response, loads(response.content))
