@@ -1,5 +1,5 @@
 from django.test import TestCase
-from feed.fetch_twitter import parse_tweets, extract_urls_from_tweets
+from feed.fetch_twitter import parse_tweets, extract_urls_from_tweet, find_url_in_tweet
 from feed.models import Tweet
 from feed.tests.twitter_test_content import raw_twitter_response
 from json import loads
@@ -28,6 +28,7 @@ class TestParseTweets(TestCase):
         It should contain only url to download, None should be excluded
         """
         tweets = parse_tweets(self.response_dict)
-        image_urls = extract_urls_from_tweets(tweets)
+        urls = find_url_in_tweet(tweets[0])
+        image_urls = extract_urls_from_tweet(urls)
         self.assertNotIn(None, image_urls)
         

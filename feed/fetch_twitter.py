@@ -17,9 +17,7 @@ def fetch_twitter():
     response, content = fetch_tweets()
     if response.status == 200:
         write_to_file(content)
-        tweets = parse_tweets(loads(content))
-        image_urls = extract_urls_from_tweets(tweets)
-        download_all(image_urls)
+        parse_tweets(loads(content))
     
 def fetch_tweets():
     """
@@ -58,27 +56,27 @@ def parse_tweets(result_dict):
         tweet_json['from_user'] = result['from_user']
         tweet = Tweet(**tweet_json)
         urls = find_url_in_tweet(tweet.text)
+        image_urls = extract_urls_from_tweet(urls)
+        download_all(image_urls)
         tweet.save()
 
         messages.append(result['text'])
     return messages
 
-def extract_urls_from_tweets(tweets):
+def extract_urls_from_tweet(urls):
     image_urls = []
-    for tweet in iter(tweets):
-        urls = find_url_in_tweet(tweet)
-        for url in iter(urls):
-            try:
-                image_url = find_image_url_in_page(url)
-            except ServerNotFoundError, e:
-                log.error('fail to find photo in url %s' % url)
-                log.exception(e)
-            except BadStatusLine, e:
-                log.error('fail to find photo in url %s' % url)
-                log.exception(e)
+    for url in iter(urls):
+        try:
+            image_url = find_image_url_in_page(url)
+        except ServerNotFoundError, e:
+            log.error('fail to find photo in url %s' % url)
+            log.exception(e)
+        except BadStatusLine, e:
+            log.error('fail to find photo in url %s' % url)
+            log.exception(e)
                 
-            if image_url is not None:
-                image_urls.append(image_url)
+        if image_url is not None:
+            image_urls.append(image_url)
     return image_urls
 
 def find_image_url_in_page(url):
