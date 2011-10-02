@@ -57,6 +57,7 @@ def parse_tweets(result_dict):
         tweet_json['profile_image_url'] = result['profile_image_url']
         tweet_json['from_user'] = result['from_user']
         tweet = Tweet(**tweet_json)
+        urls = find_url_in_tweet(tweet.text)
         tweet.save()
 
         messages.append(result['text'])
