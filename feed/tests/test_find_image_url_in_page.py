@@ -15,9 +15,9 @@ class TestFindImageUrlInPage(TestCase):
         self.assertEqual(expected_url, image_url)
 
     def test_find_image_url_in_yfrog_page__found(self):
-        page_url = 'http://yfrog.com/kg95174314j'
+        page_url = 'http://yfrog.com/kiqyuofj'
         image_url = find_image_url_in_page(page_url)
-        expected_url = 'http://desmond.yfrog.com/Himg736/scaled.php?tn=0&server=736&filename=95174314.jpg&xsize=640&ysize=640'
+        expected_url = 'http://desmond.yfrog.com/Himg738/scaled.php?tn=0&server=738&filename=qyuof.jpg&xsize=640&ysize=640'
         self.assertEqual(expected_url, image_url)
 
     def test_find_image_url_in_molome_page__found(self):
