@@ -42,11 +42,15 @@ def save_image(image_name, content):
     create_thumbnail(image_name)
 
 def download_all(image_urls):
+    image_names = []
     for image_url in image_urls:
         try:
-            download(image_url)
+            image_name = download(image_url)
+            if image_name is not None:
+                image_names.append(image_name)
         except RelativeURIError:
             log.error('cannot d/l image from url %s' % image_url)
+    return image_names
 
 def download(image_url):
     response, content = client.request(image_url)
@@ -56,6 +60,8 @@ def download(image_url):
         image_url = image_url.split('?')[0] # chop the query string out
         image_name = default_storage.get_valid_name(image_url) 
         save_image(image_name, content)
+        return image_name
     else:
         log.error('%s %s' % (response.status, response.get('content-type', None)))
+        return None
 

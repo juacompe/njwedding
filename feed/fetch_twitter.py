@@ -2,7 +2,7 @@ from datetime import datetime
 from django.conf import settings
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
-from feed.models import Tweet
+from feed.models import Tweet, Photo
 from feed.regex import get_image_url_from_raw_html
 from httplib import BadStatusLine
 from httplib2 import Http, ServerNotFoundError
@@ -58,7 +58,10 @@ def parse_tweets(result_dict):
         # download photos in the tweet
         urls = find_url_in_tweet(tweet.text)
         image_urls = extract_urls_from_tweet(urls)
-        download_all(image_urls)
+        photos = download_all(image_urls)
+        for photo_name in photos:
+            photo = Photo(name = photo_name, tweet = tweet)
+            photo.save()
         messages.append(result['text'])
     return messages
 

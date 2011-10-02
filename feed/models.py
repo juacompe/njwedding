@@ -13,7 +13,7 @@ class Tweet(Model):
     class Meta:
         ordering = ['created_at']
 
-class PhotoUrl(Model):
-    photo_url = CharField(max_length = 200, blank = True, null = True)
-    tweet = ForeignKey(Tweet, related_name = 'photo_urls')
+class Photo(Model):
+    name = CharField(max_length = 200, blank = True, null = True)
+    tweet = ForeignKey(Tweet, related_name = 'photos')
     
