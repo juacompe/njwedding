@@ -46,7 +46,6 @@ def parse_tweets(result_dict):
         created_at_str = result['created_at'] + ' UTC' # +0000 = UTC
         created_at = datetime.strptime(created_at_str, '%a, %d %b %Y %H:%M:%S +0000 %Z')
         result.update({'created_at': created_at})
-
         # save into database
         tweet_json = {}
         tweet_json['text'] = result['text']
@@ -55,11 +54,11 @@ def parse_tweets(result_dict):
         tweet_json['profile_image_url'] = result['profile_image_url']
         tweet_json['from_user'] = result['from_user']
         tweet = Tweet(**tweet_json)
+        tweet.save()
+        # download photos in the tweet
         urls = find_url_in_tweet(tweet.text)
         image_urls = extract_urls_from_tweet(urls)
         download_all(image_urls)
-        tweet.save()
-
         messages.append(result['text'])
     return messages
 

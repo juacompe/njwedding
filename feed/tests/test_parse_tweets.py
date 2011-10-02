@@ -28,7 +28,8 @@ class TestParseTweets(TestCase):
         It should contain only url to download, None should be excluded
         """
         tweets = parse_tweets(self.response_dict)
-        urls = find_url_in_tweet(tweets[0])
-        image_urls = extract_urls_from_tweet(urls)
-        self.assertNotIn(None, image_urls)
+        for tweet in tweets:
+            urls = find_url_in_tweet(tweet)
+            image_urls = extract_urls_from_tweet(urls)
+            self.assertNotIn(None, image_urls)
         
