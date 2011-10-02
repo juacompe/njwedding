@@ -35,10 +35,6 @@ def write_to_file(content):
     """
     Write `content` into /media/search.json
     """
-    #read existing content
-    exiting_content = default_storage.open('search.json').read()
-    #save existing content to backup
-    path = default_storage.save('search.json', ContentFile(exiting_content))
     #delete current search.json
     default_storage.delete('search.json')
     #save new content to search.json, so search.json has the latest content from twitters
@@ -53,16 +49,16 @@ def parse_tweets(result_dict):
         created_at = datetime.strptime(created_at_str, '%a, %d %b %Y %H:%M:%S +0000 %Z')
         result.update({'created_at': created_at})
 
-        # remove ignored data
+        # save into database
         tweet_json = {}
         tweet_json['text'] = result['text']
         tweet_json['created_at'] = result['created_at']
         tweet_json['id_str'] = result['id_str']
         tweet_json['profile_image_url'] = result['profile_image_url']
         tweet_json['from_user'] = result['from_user']
-
         tweet = Tweet(**tweet_json)
         tweet.save()
+
         messages.append(result['text'])
     return messages
 
