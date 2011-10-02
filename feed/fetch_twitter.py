@@ -1,6 +1,8 @@
+from datetime import datetime
 from django.conf import settings
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
+from feed.models import Tweet, Photo
 from feed.regex import get_image_url_from_raw_html
 from httplib import BadStatusLine
 from httplib2 import Http, ServerNotFoundError
@@ -15,9 +17,7 @@ def fetch_twitter():
     response, content = fetch_tweets()
     if response.status == 200:
         write_to_file(content)
-        tweets = parse_tweets(loads(content))
-        image_urls = extract_urls_from_tweets(tweets)
-        download_all(image_urls)
+        parse_tweets(loads(content))
     
 def fetch_tweets():
     """
@@ -33,10 +33,6 @@ def write_to_file(content):
     """
     Write `content` into /media/search.json
     """
-    #read existing content
-    exiting_content = default_storage.open('search.json').read()
-    #save existing content to backup
-    path = default_storage.save('search.json', ContentFile(exiting_content))
     #delete current search.json
     default_storage.delete('search.json')
     #save new content to search.json, so search.json has the latest content from twitters
@@ -44,24 +40,45 @@ def write_to_file(content):
 
 def parse_tweets(result_dict):
     results = result_dict['results']
-    return [ tweet['text'] for tweet in results ]
+    messages = []
+    for result in results:
+        # update timezone of created_at
+        created_at_str = result['created_at'] + ' UTC' # +0000 = UTC
+        created_at = datetime.strptime(created_at_str, '%a, %d %b %Y %H:%M:%S +0000 %Z')
+        result.update({'created_at': created_at})
+        # save into database
+        tweet_json = {}
+        tweet_json['text'] = result['text']
+        tweet_json['created_at'] = result['created_at']
+        tweet_json['id_str'] = result['id_str']
+        tweet_json['profile_image_url'] = result['profile_image_url']
+        tweet_json['from_user'] = result['from_user']
+        tweet = Tweet(**tweet_json)
+        tweet.save()
+        # download photos in the tweet
+        urls = find_url_in_tweet(tweet.text)
+        image_urls = extract_urls_from_tweet(urls)
+        photos = download_all(image_urls)
+        for photo_name in photos:
+            photo = Photo(name = photo_name, tweet = tweet)
+            photo.save()
+        messages.append(result['text'])
+    return messages
 
-def extract_urls_from_tweets(tweets):
+def extract_urls_from_tweet(urls):
     image_urls = []
-    for tweet in iter(tweets):
-        urls = find_url_in_tweet(tweet)
-        for url in iter(urls):
-            try:
-                image_url = find_image_url_in_page(url)
-            except ServerNotFoundError, e:
-                log.error('fail to find photo in url %s' % url)
-                log.exception(e)
-            except BadStatusLine, e:
-                log.error('fail to find photo in url %s' % url)
-                log.exception(e)
+    for url in iter(urls):
+        try:
+            image_url = find_image_url_in_page(url)
+        except ServerNotFoundError, e:
+            log.error('fail to find photo in url %s' % url)
+            log.exception(e)
+        except BadStatusLine, e:
+            log.error('fail to find photo in url %s' % url)
+            log.exception(e)
                 
-            if image_url is not None:
-                image_urls.append(image_url)
+        if image_url is not None:
+            image_urls.append(image_url)
     return image_urls
 
 def find_image_url_in_page(url):
