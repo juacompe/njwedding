@@ -6,3 +6,4 @@ media/collected_twitter_images/*
 .idea
 *~
 *.db
+settings_local.py
