@@ -70,7 +70,7 @@ body{
 
 #main_menu{
     text-align: center;
-    width: 770px;
+    width: 750px;
     margin-left:auto;
     margin-right: auto;
 }
@@ -129,4 +129,14 @@ p.msg{
     position: absolute;
     right: 60px;
     top: 735px;
+}
+
+#fb_like{
+    text-align: center;
+    margin-top: 50px
+}
+
+#fb_comment{
+    text-align: center;
+    margin-bottom: 30px
 }
