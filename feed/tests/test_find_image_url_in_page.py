@@ -23,7 +23,7 @@ class TestFindImageUrlInPage(TestCase):
     def test_find_image_url_in_molome_page__found(self):
         page_url = 'http://molo.me/p/2uvG77'
         image_url = find_image_url_in_page(page_url)
-        expected_url = 'http://molo.me/photos/webbig/2uvG77?key='
+        expected_url = 'http://p.molo.me/2uvG77?'
         self.assertIn(expected_url, image_url)
 
     def test_find_image_url_in_picplz_page__found(self):

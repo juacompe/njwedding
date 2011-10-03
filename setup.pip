@@ -1,3 +1,4 @@
 PIL
 django
 httplib2
+django-annoying
