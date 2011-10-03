@@ -118,7 +118,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'slideshow',
@@ -152,7 +152,7 @@ LOGGING = {
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
-TWITTER_QUERY = '%23njwedding%20OR%20nattyait%20OR%20juacompe'
+TWITTER_QUERY = '%23njwedding%20OR%20nattyait%20OR%20juacompeOR%20natty_juacompe'
 
 # settings_local
 try:
