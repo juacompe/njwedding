@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block body %}
+    {% include "_header.html" %}
+
+    <div id="page_content">
+        {% include "_main_menu.html" %}
+
+
+    {% block page_content %}
+    {% endblock page_content %}
+        <div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#appId=282077095155130&amp;xfbml=1"></script>
+        <div id="fb_like">
+        <fb:like href="http://njwedding.giga-sites.com" send="true" width="450" show_faces="true" font=""></fb:like>
+        </div>
+        <div id="fb_comment">
+        <fb:comments href="http://njwedding.giga-sites.com/guestbook" num_posts="10" width="500"></fb:comments>
+            </div>
+		</div>
+
+    </div><!--id="page_content"-->
+
+    {% include "_footer.html" %}
+
+{% endblock body%}

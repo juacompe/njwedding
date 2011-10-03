@@ -1,24 +1,10 @@
 {% extends "base.html" %}
 
 {% block body %}
-    <div id="page_header">
-        <img src="{{ STATIC_URL }}images/website_title.png" id="website_title" />
-        <div id="shortcut_menu_container" >
-            <div class="each_menu"><a href="http://g.co/maps/ynv9f"><div class="view_map_icon"></div>View Map</div></a>
-            <div class="each_menu"><a href="http://www.google.com/calendar/event?action=TEMPLATE&text=Natty%20and%20Juacompe's%20wedding&dates=20111015T110000Z/20111015T150000Z&details=4th%20floor%2C%20Panorama%20Ballroom&location=Amari%20Boulevard%20Hotel&trp=false&sprop=http%3A%2F%2Fnjwedding.giga-sites.com&sprop=name:Natty%20and%20Juacompe's%20wedding" target="_blank"><div class="add_to_calendar_icon"></div>Add to Calendar</div></a>
-        </div><!--id="shortcut_menu_container"-->
-    </div><!--id="page_header"-->
+    {% include "_header.html" %}
     
     <div id="page_content">
-        <div id="main_menu">
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">about</a></li>
-                <li><a target="_blank" href="http://njwedding.giga-sites.com/blog">blog</a></li>
-                <li><a target="_blank" href="http://www.facebook.com/media/set/?set=a.1933499773557.2096394.1124168060&l=4050ec72a8&type=1">gallery</a></li>
-                <div style="clear:both"></div>
-            </ul>
-        </div><!--id="main_menu"-->
+        {% include "_main_menu.html" %}
 
 
     {% block page_content %}
@@ -30,8 +16,6 @@
 
     </div><!--id="page_content"-->
 
-    <div id="page_footer">
-        <img src="{{ STATIC_URL }}images/igoyz.png" class="igoyz_logo" />
-    </div><!--id="page_footer"-->
+    {% include "_footer.html" %}
 
 {% endblock body%}
