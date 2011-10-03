@@ -59,7 +59,10 @@ def download(image_url):
     if response.status == 200:
         image_url = image_url.split('?')[0] # chop the query string out
         image_name = default_storage.get_valid_name(image_url) 
-        save_image(image_name, content)
+        image_path = TWITTER_IMAGE_PATH + image_name
+        if not default_storage.exists(image_path):
+            log.info('saving image name = %s' % image_path)
+            save_image(image_name, content)
         return image_name
     else:
         log.error('%s %s' % (response.status, response.get('content-type', None)))
