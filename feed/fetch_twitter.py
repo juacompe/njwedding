@@ -102,7 +102,7 @@ def find_image_url_in_page(url):
         image_url = get_image_url_from_raw_html(content, regex_text)
     elif is_molome_response(response):
         regex_text='src="(?P<src>.+?)" alt="Photo"'
-        image_url = 'http://molo.me' + get_image_url_from_raw_html(content, regex_text)
+        image_url = get_image_url_from_raw_html(content, regex_text)
     elif is_picplz_response(response):
         regex_text='src="(?P<src>.+?)" width="\d+" height="\d+" id="mainImage"'
         image_url = get_image_url_from_raw_html(content, regex_text)
