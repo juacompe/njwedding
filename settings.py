@@ -152,7 +152,7 @@ LOGGING = {
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
-TWITTER_QUERY = '%23njwedding%20OR%20nattyait%20OR%20juacompeOR%20natty_juacompe'
+TWITTER_QUERY = '%23njwedding%20OR%20nattyait%20OR%20juacompe'
 
 # settings_local
 try:
