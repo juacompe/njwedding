@@ -1,4 +1,8 @@
 {% extends "base.html" %}
+{% block script_defer %}
+    <link type="text/css" rel="stylesheet" href="{{STATIC_URL}}css/guestbook.css" media="screen" />
+{% endblock %}
+
 {% block body %}
     {% include "_header.html" %}
 
@@ -13,7 +17,7 @@
         <fb:like href="http://njwedding.giga-sites.com" send="true" width="450" show_faces="true" font=""></fb:like>
         </div>
         <div id="fb_comment">
-        <fb:comments href="http://njwedding.giga-sites.com/guestbook" num_posts="10" width="500"></fb:comments>
+        <fb:comments href="http://njwedding.giga-sites.com/guestbook" num_posts="10" width="500" class="fb_comments"></fb:comments>
             </div>
 		</div>
 
