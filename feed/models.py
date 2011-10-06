@@ -17,3 +17,5 @@ class Photo(Model):
     name = CharField(unique = True, max_length = 200, blank = True, null = True)
     tweet = ForeignKey(Tweet, related_name = 'photos')
     
+    def __unicode__(self):
+        return '%s: %s' % (self.tweet.text, self.name)
