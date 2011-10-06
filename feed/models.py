@@ -3,7 +3,7 @@ from django.db.models import Model, TextField, DateTimeField, CharField, Foreign
 class Tweet(Model):
     text = TextField()
     created_at = DateTimeField()
-    id_str = CharField(max_length = 20)
+    id_str = CharField(unique = True, max_length = 20)
     profile_image_url = CharField(max_length = 200)
     from_user = CharField(max_length = 50)
 
@@ -14,6 +14,6 @@ class Tweet(Model):
         ordering = ['created_at']
 
 class Photo(Model):
-    name = CharField(max_length = 200, blank = True, null = True)
+    name = CharField(unique = True, max_length = 200, blank = True, null = True)
     tweet = ForeignKey(Tweet, related_name = 'photos')
     
