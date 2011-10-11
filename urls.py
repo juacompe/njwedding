@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^api/new_tweets/$', 'feed.views.new_tweets', name='new_tweets'),
     (r'^about/$',direct_to_template, {'template': 'about.html'}),
     (r'^guestbook/$',direct_to_template, {'template': 'guestbook.html'}),
+    (r'^gallery/$',direct_to_template, {'template': 'nj_gallery.html'}),
     url(r'^testjs/', include('testjs.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
