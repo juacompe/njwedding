@@ -2,6 +2,8 @@ from datetime import datetime
 from django.conf import settings
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
+from django.db.transaction import commit_on_success
+from django.db.utils import IntegrityError, DatabaseError
 from feed.models import Tweet, Photo
 from feed.regex import get_image_url_from_raw_html
 from httplib import BadStatusLine
@@ -38,6 +40,7 @@ def write_to_file(content):
     #save new content to search.json, so search.json has the latest content from twitters
     path = default_storage.save('search.json', ContentFile(content))
 
+@commit_on_success
 def parse_tweets(result_dict):
     results = result_dict['results']
     messages = []
@@ -47,21 +50,25 @@ def parse_tweets(result_dict):
         created_at = datetime.strptime(created_at_str, '%a, %d %b %Y %H:%M:%S +0000 %Z')
         result.update({'created_at': created_at})
         # save into database
-        tweet_json = {}
-        tweet_json['text'] = result['text']
-        tweet_json['created_at'] = result['created_at']
-        tweet_json['id_str'] = result['id_str']
-        tweet_json['profile_image_url'] = result['profile_image_url']
-        tweet_json['from_user'] = result['from_user']
-        tweet = Tweet(**tweet_json)
-        tweet.save()
-        # download photos in the tweet
-        urls = find_url_in_tweet(tweet.text)
-        image_urls = extract_urls_from_tweet(urls)
-        photos = download_all(image_urls)
-        for photo_name in photos:
-            photo = Photo(name = photo_name, tweet = tweet)
-            photo.save()
+        try:
+            tweet_json = {}
+            tweet_json['text'] = result['text']
+            tweet_json['created_at'] = result['created_at']
+            tweet_json['id_str'] = result['id_str']
+            tweet_json['profile_image_url'] = result['profile_image_url']
+            tweet_json['from_user'] = result['from_user']
+            tweet = Tweet(**tweet_json)
+            tweet.save()
+            # download photos in the tweet
+            urls = find_url_in_tweet(tweet.text)
+            image_urls = extract_urls_from_tweet(urls)
+            photos = download_all(image_urls)
+            for photo_name in photos:
+                photo = Photo(name = photo_name, tweet = tweet)
+                photo.save()
+        except (IntegrityError, DatabaseError):
+            pass # tweet already saved
+
         messages.append(result['text'])
     return messages
 
