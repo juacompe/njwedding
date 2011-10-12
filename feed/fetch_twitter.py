@@ -57,6 +57,9 @@ def parse_tweets(result_dict):
             tweet_json['id_str'] = result['id_str']
             tweet_json['profile_image_url'] = result['profile_image_url']
             tweet_json['from_user'] = result['from_user']
+            if result['geo']:
+                tweet_json['lat'] = result['geo']['coordinates'][0]
+                tweet_json['long'] = result['geo']['coordinates'][1]
             tweet = Tweet(**tweet_json)
             tweet.save()
             # download photos in the tweet

@@ -34,3 +34,19 @@
 .galleria-container {
     background: none!important;
 }
+
+.galleria-info-text {
+display:block;
+text-align:center;
+background:rgba(0,0,0,.5);
+
+}
+
+.galleria-info{
+    left: 25%;
+    top: 74%;
+}
+
+.galleria-info-link {
+display:none;
+} 
