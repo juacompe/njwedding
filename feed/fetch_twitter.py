@@ -11,7 +11,8 @@ from httplib2 import Http, ServerNotFoundError
 from json import loads
 from storage.image_utils import download_all 
 import logging
-import simplejson as json
+from django.utils import simplejson as json
+from django.core.serializers.json import DjangoJSONEncoder
 
 client = Http()
 log = logging.getLogger(__name__)
@@ -36,7 +37,7 @@ def write_to_file(content):
     """
     Write `content` into /media/search.json
     """
-    s = json.dumps(content)
+    s = json.dumps(content, cls=DjangoJSONEncoder)
     #delete current search.json
     default_storage.delete('search.json')
     #save new content to search.json, so search.json has the latest content from twitters
@@ -79,7 +80,8 @@ def parse_tweets(result_dict):
             #change back format for saving to file
             tweet_json['created_at'] = created_at_str
             messages.append(tweet_json)
-    twitter_api_format = {'results':messages}
+    db_result_to_file = Tweet.objects.order_by('-created_at')[:10]
+    twitter_api_format = {'results':db_result_to_file.values()}
     return twitter_api_format
 
 def extract_urls_from_tweet(urls):
