@@ -17,7 +17,11 @@ def collect_images_and_text():
     photos = Photo.objects.order_by('-tweet__created_at')
     photo_list=[]
     for photo in photos:
-        photo_dict = {'image':photo.name,'text':photo.tweet.text}
+        if photo.tweet.lat:
+            location_link = "<a href='http://maps.google.com/maps?q=%s,%s' target='_blank'>(location)</a>" % (photo.tweet.lat,photo.tweet.long)
+        else:
+            location_link = ""
+        photo_dict = {'image':photo.name,'text':photo.tweet.text,'location_link':location_link}
         photo_list.append(photo_dict)
     return photo_list
 

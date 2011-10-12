@@ -21,7 +21,7 @@
         autoplay:7000,
         transition:"fade",
         show_info:true,
-        _toggle_info: false,
+        _toggle_info: false
     });
     </script>
     
@@ -40,7 +40,7 @@
 
         <a href="{{IMAGE_URL}}{{tweet.image}}">
             <img src="{{THUMBNAIL_URL}}{{tweet.image}}" alt="Tweet photos tagged with #njwedding"
-                 title="{{ tweet.text }} <a href='http://maps.google.com' target='_blank'}>(location)</a>"/>
+                 title="{{ tweet.text }} {{ tweet.location_link }}"/>
         </a>
 
 
