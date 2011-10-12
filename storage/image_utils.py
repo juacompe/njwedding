@@ -4,6 +4,7 @@ from httplib2 import Http, RelativeURIError
 from PIL import Image
 from StringIO import StringIO
 import logging
+from feed.models import Photo, Tweet
 
 TWITTER_IMAGE_PATH = 'collected_twitter_images/'
 THUMBNAIL_PATH = TWITTER_IMAGE_PATH + 'thumbnails/' 
@@ -11,6 +12,14 @@ THUMBNAIL_SIZE = 60, 38
 
 client = Http()
 log = logging.getLogger(__name__)
+
+def collect_images_and_text():
+    photos = Photo.objects.order_by('-tweet__created_at')
+    photo_list=[]
+    for photo in photos:
+        photo_dict = {'image':photo.name,'text':photo.tweet.text}
+        photo_list.append(photo_dict)
+    return photo_list
 
 def collected_images():
     dir_names, file_names = default_storage.listdir(TWITTER_IMAGE_PATH)
