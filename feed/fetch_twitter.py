@@ -20,8 +20,8 @@ log = logging.getLogger(__name__)
 def fetch_twitter():
     response, content = fetch_tweets()
     if response.status == 200:
-        messages = parse_tweets(loads(content))
-        write_to_file(messages)
+        write_to_file(content)
+        parse_tweets(loads(content))
     
 def fetch_tweets():
     """
@@ -37,52 +37,52 @@ def write_to_file(content):
     """
     Write `content` into /media/search.json
     """
-    s = json.dumps(content, cls=DjangoJSONEncoder)
+    #s = json.dumps(content, cls=DjangoJSONEncoder)
     #delete current search.json
     default_storage.delete('search.json')
     #save new content to search.json, so search.json has the latest content from twitters
-    path = default_storage.save('search.json', ContentFile(s))
+    path = default_storage.save('search.json', ContentFile(content))
 
 @commit_on_success
 def parse_tweets(result_dict):
     results = result_dict['results']
     messages = []
     for result in results:
-        if not result['text'].lower().startswith('rt'):
-            # update timezone of created_at
-            created_at_str = result['created_at'] + ' UTC' # +0000 = UTC
-            created_at = datetime.strptime(created_at_str, '%a, %d %b %Y %H:%M:%S +0000 %Z')
-            result.update({'created_at': created_at})
-            # save into database
-            try:
-                tweet_json = {}
-                tweet_json['text'] = result['text']
-                tweet_json['created_at'] = result['created_at']
-                tweet_json['id_str'] = result['id_str']
-                tweet_json['profile_image_url'] = result['profile_image_url']
-                tweet_json['from_user'] = result['from_user']
-                if result['geo']:
-                    tweet_json['lat'] = result['geo']['coordinates'][0]
-                    tweet_json['long'] = result['geo']['coordinates'][1]
-                tweet = Tweet(**tweet_json)
-                tweet.save()
-                # download photos in the tweet
-                urls = find_url_in_tweet(tweet.text)
-                image_urls = extract_urls_from_tweet(urls)
-                photos = download_all(image_urls)
-                for photo_name in photos:
-                    if not photo_name.lower().endswith('.jpg'):
-                        photo_name = photo_name+'.jpg'
-                    photo = Photo(name = photo_name, tweet = tweet)
-                    photo.save()
-            except (IntegrityError, DatabaseError):
-                pass # tweet already saved
-            #change back format for saving to file
-            tweet_json['created_at'] = created_at_str
-            messages.append(tweet_json)
-    db_result_to_file = Tweet.objects.order_by('-created_at')[:10]
-    twitter_api_format = {'results':db_result_to_file.values()}
-    return twitter_api_format
+        #if not result['text'].lower().startswith('rt'):
+        # update timezone of created_at
+        created_at_str = result['created_at'] + ' UTC' # +0000 = UTC
+        created_at = datetime.strptime(created_at_str, '%a, %d %b %Y %H:%M:%S +0000 %Z')
+        result.update({'created_at': created_at})
+        # save into database
+        try:
+            tweet_json = {}
+            tweet_json['text'] = result['text']
+            tweet_json['created_at'] = result['created_at']
+            tweet_json['id_str'] = result['id_str']
+            tweet_json['profile_image_url'] = result['profile_image_url']
+            tweet_json['from_user'] = result['from_user']
+            if result['geo']:
+                tweet_json['lat'] = result['geo']['coordinates'][0]
+                tweet_json['long'] = result['geo']['coordinates'][1]
+            tweet = Tweet(**tweet_json)
+            tweet.save()
+            # download photos in the tweet
+            urls = find_url_in_tweet(tweet.text)
+            image_urls = extract_urls_from_tweet(urls)
+            photos = download_all(image_urls)
+            for photo_name in photos:
+                if not photo_name.lower().endswith('.jpg'):
+                    photo_name = photo_name+'.jpg'
+                photo = Photo(name = photo_name, tweet = tweet)
+                photo.save()
+        except (IntegrityError, DatabaseError):
+            pass # tweet already saved
+        #change back format for saving to file
+        tweet_json['created_at'] = created_at_str
+        messages.append(tweet_json)
+    #db_result_to_file = Tweet.objects.order_by('-created_at')[:10]
+    #twitter_api_format = {'results':db_result_to_file.values()}
+    return messages
 
 def extract_urls_from_tweet(urls):
     image_urls = []
