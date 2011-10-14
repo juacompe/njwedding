@@ -7,7 +7,24 @@
 
 
     {% block page_content %}
-        Under construction !!
+    <p>เว็บไซต์นี้เป็นเว็บที่จะคอย feed ทวีตที่ถูก tag ด้วย #thaiflood มาแสดงโดยจะกรองทวีตที่ขึ้นต้นด้วย RT ออกไป (ไม่งั้นอ่านไม่ทัน -___-")</p>
+
+    <h3>ข้อจำกัด</h3>
+    <p>หน้าเว็บจะ refresh เองโดยอัตโนมัติทุกๆ 5 นาทีเพื่อดึงรูปใหม่ๆมา สามารถกด refresh เองก็ได้ (แต่ไม่แนะนำนะครับ เพราะ server มันตัวเล็กๆ ที่เราเช่นกันเอง ถ้าทุกคนรุม refresh มันอาจจะ down ได้ -/\-)</p>
+    <p>server จะดึงทวีตใหม่มาทีละ 10 ทวีตทุกๆ 1 นาที ถ้านาทีไหนมีคนทวีตกันเยอะๆ บางรูปอาจจะไม่ถูกดึงมานะครับ (ไม่กล้าดึงเยอะกว่านี้ กลัว server process ไม่ไหว)</p>
+
+    <h3>Image service ที่เว็บเรา support</h3>
+    <p>yfrog, molo.me, twitpic, instagram, flickr, lockerz, picplz, twitgoo, owly, mobypicture, imgly, brizzly</p>
+
+    <h3>Image service ที่เว็บเราไม่* support</h3>
+    <p>pic.twitter.com (เพราะมันงก ไม่ยอมเปิด API -*-)</p>
+
+    <h3>วิธีทำให้รูปที่ทวีตมี link ไปยัง Google Map</h3>
+    <p>รูปที่ถูกทวีต และมี geo location แนบมา (ต้อง enable location service ใน twitter client ที่ใช้ในมือถือก่อน) จะมี link ไปยัง Google map ให้ ทำให้สามารถกดดูได้ว่ารูปที่ถูกถ่าย ถูกถ่ายจากตำแหน่งใด</p>
+
+    <h3>โปรแกรม Thaiflood</h3>
+    <p>ถ้าใช้โปรแกรม Thaiflood ในมือถือ แล้วเลือก "ถ่ายภาพและส่งไปยัง Twitter" จะมาทั้งรูปและ location โดยอัตโนมัตินะครับ</p>
+
     {% endblock page_content %}
 
 
