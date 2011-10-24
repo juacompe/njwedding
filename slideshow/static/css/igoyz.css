@@ -1,5 +1,5 @@
 body{
-    background-color: #03bdaf;
+    background-color: #8af;
 }
 
 #website_title{
@@ -139,4 +139,9 @@ p.msg{
 #fb_comment{
     text-align: center;
     margin-bottom: 30px
+}
+
+#website_title a{
+    text-decoration: none;
+    color: white;
 }

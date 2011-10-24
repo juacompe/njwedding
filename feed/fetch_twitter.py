@@ -11,6 +11,8 @@ from httplib2 import Http, ServerNotFoundError
 from json import loads
 from storage.image_utils import download_all 
 import logging
+from django.utils import simplejson as json
+from django.core.serializers.json import DjangoJSONEncoder
 
 client = Http()
 log = logging.getLogger(__name__)
@@ -35,6 +37,7 @@ def write_to_file(content):
     """
     Write `content` into /media/search.json
     """
+    #s = json.dumps(content, cls=DjangoJSONEncoder)
     #delete current search.json
     default_storage.delete('search.json')
     #save new content to search.json, so search.json has the latest content from twitters
@@ -45,6 +48,7 @@ def parse_tweets(result_dict):
     results = result_dict['results']
     messages = []
     for result in results:
+        #if not result['text'].lower().startswith('rt'):
         # update timezone of created_at
         created_at_str = result['created_at'] + ' UTC' # +0000 = UTC
         created_at = datetime.strptime(created_at_str, '%a, %d %b %Y %H:%M:%S +0000 %Z')
@@ -67,12 +71,17 @@ def parse_tweets(result_dict):
             image_urls = extract_urls_from_tweet(urls)
             photos = download_all(image_urls)
             for photo_name in photos:
+                if not photo_name.lower().endswith('.jpg'):
+                    photo_name = photo_name+'.jpg'
                 photo = Photo(name = photo_name, tweet = tweet)
                 photo.save()
         except (IntegrityError, DatabaseError):
             pass # tweet already saved
-
-        messages.append(result['text'])
+        #change back format for saving to file
+        tweet_json['created_at'] = created_at_str
+        messages.append(tweet_json)
+    #db_result_to_file = Tweet.objects.order_by('-created_at')[:10]
+    #twitter_api_format = {'results':db_result_to_file.values()}
     return messages
 
 def extract_urls_from_tweet(urls):
