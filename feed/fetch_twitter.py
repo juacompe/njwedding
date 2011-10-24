@@ -100,7 +100,7 @@ def find_image_url_in_page(url):
     image_url = None
     if is_twitpic_response(response):
         regex_text='id="photo-display" src="(?P<src>.+?)"'
-        image_url = get_image_url_from_raw_html(content, regex_text)
+        image_url = 'http:' + get_image_url_from_raw_html(content, regex_text)
     elif is_lockerz_response(response):
         regex_text='id="photo" src="(?P<src>.+?)"'
         image_url = get_image_url_from_raw_html(content, regex_text)
